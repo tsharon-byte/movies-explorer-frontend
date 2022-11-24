@@ -1,0 +1,12 @@
+.two-columns {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+}
+
+@media (max-width: 520px) {
+  .two-columns {
+    flex-direction: column;
+    gap: 56px;
+  }
+}

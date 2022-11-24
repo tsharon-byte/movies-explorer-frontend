@@ -1,0 +1,16 @@
+.block {
+  box-sizing: border-box;
+  padding: 0 5.46875%;
+}
+
+@media (max-width: 768px) {
+  .block {
+    padding: 0 50px;
+  }
+}
+
+@media (max-width: 520px) {
+  .block {
+    padding: 0 10px;
+  }
+}

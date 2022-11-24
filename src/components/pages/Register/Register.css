@@ -1,0 +1,149 @@
+.register {
+  width: 396px;
+  margin: 0 auto;
+  box-sizing: border-box;
+  height: 100vh;
+  padding: 70px 0;
+  display: flex;
+  flex-direction: column;
+  justify-content: start;
+}
+
+.profile {
+  display: flex;
+  flex-direction: column;
+  gap: 74px;
+}
+
+.profile__container {
+  height: calc(100vh - 253px);
+  width: min(410px, 100%);
+  margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+  box-sizing: border-box;
+  padding: 74px 30px 70px;
+  justify-content: space-between;
+  gap: 123px;
+}
+
+.register__header-container {
+  height: 217px;
+  display: flex;
+  flex-direction: column;
+  align-items: start;
+  gap: 40px;
+  padding-bottom: 40px;
+}
+
+.register__header {
+  font-weight: 500;
+  font-size: 24px;
+  line-height: 29px;
+  margin: 0;
+  box-sizing: border-box;
+  text-align: center;
+}
+
+.form {
+  height: calc(100vh - 217px);
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  box-sizing: border-box;
+}
+
+.register__values {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.form__inputs {
+  display: flex;
+  flex-direction: column;
+  gap: 20px
+}
+
+.form__footer {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.form__links {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  gap: 6px;
+  font-weight: 400;
+  font-size: 14px;
+  line-height: 17px;
+}
+
+.form__text {
+  font-weight: 400;
+  text-align: center;
+  color: #8B8B8B;
+}
+
+.form__link {
+  text-decoration: none;
+  font-weight: 400;
+  text-align: center;
+  color: #4285F4;
+}
+
+.form__button {
+  background: transparent;
+  padding: 0;
+  border: none;
+  cursor: pointer;
+}
+
+.form__button:hover {
+  opacity: .8;
+}
+
+.form__link_color_white {
+  color: #FFFFFF;
+}
+
+.form__link_color_red {
+  color: #EE3465;
+}
+
+@media (max-width: 768px) {
+  .register {
+  }
+}
+
+@media (max-width: 520px) {
+  .form {
+    height: calc(100vh - 253px);
+  }
+
+  .register {
+    width: 100%;
+    padding: 0px 30px 30px;
+  }
+
+  .register__header-container {
+    height: 253px;
+    justify-content: center;
+    align-items: center;
+    gap: 50px;
+    padding-bottom: 80px;
+  }
+
+  .form__links {
+    font-size: 12px;
+    line-height: 15px;
+  }
+
+  .profile__container {
+    padding: 70px 30px 40px;
+    gap: 80px;
+  }
+}
