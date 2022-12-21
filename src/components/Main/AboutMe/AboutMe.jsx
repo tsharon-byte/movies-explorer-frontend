@@ -1,7 +1,7 @@
 import React from 'react';
 import './AboutMe.css';
 import Heading from '../Heading/Heading';
-import Photo from '../../../images/Tanya.jpg';
+import Photo from '../../../images/AboutMe.jpg';
 import PortfolioLink from '../../PortfolioLink/PortfolioLink';
 import Anchor from '../../Anchor/Anchor';
 
