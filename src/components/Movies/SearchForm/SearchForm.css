@@ -13,6 +13,9 @@
   width: 100%;
   outline: none;
 }
+.search__input:focus {
+  border-bottom: 2px solid #fff;
+}
 
 input[type="checkbox"] {
   position: relative;
@@ -44,8 +47,7 @@ input:checked[type="checkbox"]:before {
   position: absolute;
   right: 0px;
   bottom: 13px;
-  background: transparent;
-  background-image: url(/src/images/search.svg);
+  background: transparent url(/src/images/search.svg);
   border: none;
   padding: 0;
   width: 34px;

@@ -4,7 +4,7 @@ import Anchor from '../Anchor/Anchor';
 
 function Footer() {
   return (
-    <div className="footer">
+    <footer className="footer">
       <div className="column footer__content">
         <div className="footer__caption">
           Учебный проект Яндекс.Практикум х BeatFilm.
@@ -18,7 +18,7 @@ function Footer() {
           </div>
         </div>
       </div>
-    </div>
+    </footer>
   );
 }
 export default Footer;

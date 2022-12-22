@@ -7,14 +7,14 @@ import MoviesCardList from '../Movies/MoviesCardList/MoviesCardList';
 
 function SavedMovies() {
   return (
-    <div>
+    <>
       <Navigation />
-      <div className="column block">
+      <main className="column block">
         <SearchForm />
         <MoviesCardList movies={saved} isSaved />
-      </div>
+      </main>
       <Footer />
-    </div>
+    </>
   );
 }
 export default SavedMovies;

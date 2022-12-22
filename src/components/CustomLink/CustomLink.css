@@ -7,16 +7,14 @@
   height: 100%;
 }
 
-.custom-link_type_primary {
-  color: #4285F4;
-  font-weight: 400;
-  font-size: 12px;
-  line-height: 15px;
-  height: 15px;
+.custom-link_type_active {
+  font-weight: 500;
 }
 
-.custom-link:active {
-  text-decoration: underline;
+@media (max-width: 768px) {
+  .custom-link_type_active {
+    text-decoration: underline;
+  }
 }
 
 .custom-link:hover {

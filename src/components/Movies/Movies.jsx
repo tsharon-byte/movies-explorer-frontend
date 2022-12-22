@@ -9,10 +9,10 @@ function Movies() {
   return (
     <div>
       <Navigation />
-      <div className="column block">
+      <main className="column block">
         <SearchForm />
         <MoviesCardList movies={movies} />
-      </div>
+      </main>
       <Footer />
     </div>
   );

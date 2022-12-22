@@ -7,7 +7,7 @@ import CustomLink from '../CustomLink/CustomLink';
 
 function Header() {
   return (
-    <div className="header">
+    <header className="header">
       <Logo />
       <ul className="header__nav">
         <li>
@@ -15,7 +15,7 @@ function Header() {
         </li>
         <li><NavLink to="/signin"><Button text="Войти" /></NavLink></li>
       </ul>
-    </div>
+    </header>
   );
 }
 export default Header;

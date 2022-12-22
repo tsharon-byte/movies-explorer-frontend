@@ -12,6 +12,10 @@
   line-height: 17px;
 }
 
+.input:focus {
+  outline: 2px solid #fff;
+}
+
 .input_type_profile {
   width: auto;
   text-align: right;

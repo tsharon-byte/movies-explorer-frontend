@@ -15,7 +15,7 @@ function SearchForm() {
   return (
     <form className="search-form" onSubmit={handleSubmit}>
       <div className="search">
-        <input className="search__input" type="text" value={film} onChange={handleChange} placeholder="Фильм" />
+        <input className="search__input" type="text" value={film} onChange={handleChange} placeholder="Фильм" required />
         {/* eslint-disable-next-line jsx-a11y/control-has-associated-label */}
         <button className="search__icon" type="submit" />
       </div>

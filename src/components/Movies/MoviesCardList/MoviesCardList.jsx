@@ -5,8 +5,8 @@ import './MoviesCardList.css';
 
 function MoviesCardList({ movies, isSaved }) {
   return (
-    <div className="column">
-      <div className="movies">
+    <div className="movies">
+      <div className="movies__list">
         {movies.map((item) => (
           <MoviesCard
             key={item.id}
@@ -17,8 +17,8 @@ function MoviesCardList({ movies, isSaved }) {
           />
         ))}
       </div>
-      <div className="more">
-        <button className="more__button" type="button">Ещё</button>
+      <div className="movies__more">
+        <button className="movies__button" type="button">Ещё</button>
       </div>
     </div>
   );
