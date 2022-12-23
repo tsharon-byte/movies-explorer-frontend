@@ -1,0 +1,30 @@
+.portfolio-link {
+  text-decoration: none;
+  color: #fff;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding-top: 20px;
+  padding-bottom: 19px;
+  box-sizing: border-box;
+  font-weight: 400;
+  font-size: 30px;
+  line-height: 50px;
+  letter-spacing: -0.04em;
+}
+
+.portfolio-link__caption {
+}
+
+.portfolio-link:hover {
+  background-color: rgba(32, 32, 32, .8);
+}
+
+@media (max-width: 520px) {
+
+  .portfolio-link {
+    font-weight: 400;
+    font-size: 18px;
+    line-height: 28px;
+  }
+}

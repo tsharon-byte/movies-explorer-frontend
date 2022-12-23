@@ -1,0 +1,26 @@
+.form-button {
+  background: #3456F3;
+  border-radius: 3px;
+  padding: 10px 20px;
+  box-sizing: border-box;
+  font-weight: 500;
+  font-size: 12px;
+  line-height: 16px;
+  text-align: center;
+  width: 100%;
+  border: none;
+}
+
+.disabled {
+  background: #F8F8F8;
+  color: #C2C2C2;
+}
+
+.disabled:hover {
+  opacity: 1 !important;
+}
+
+.form-button:hover {
+  cursor: pointer;
+  opacity: 0.8;
+}

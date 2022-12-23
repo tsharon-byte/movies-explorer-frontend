@@ -1,0 +1,47 @@
+.progressbar {
+  height: 36px;
+  display: flex;
+  flex-direction: row;
+  z-index: 2;
+  font-size: 14px;
+  line-height: 17px;
+}
+
+.no-background {
+  background: none !important;
+}
+
+.progressbar__value {
+  width: 20%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.progressbar__color {
+  background-color: #3DDC84;
+  color: #000;
+}
+
+.progressbar__total {
+  width: 80%;
+  background-color: #303030;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+@media (max-width: 520px) {
+  .progressbar {
+    font-size: 11px;
+    line-height: 13px;
+  }
+
+  .progressbar__value {
+    width: 100px;
+  }
+
+  .progressbar__total {
+    width: calc(100% - 100px);
+  }
+}

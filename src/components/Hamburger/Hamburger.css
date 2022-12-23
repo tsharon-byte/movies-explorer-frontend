@@ -1,0 +1,36 @@
+.hamburger__lines {
+  display: none;
+  background: transparent;
+  border: none;
+  padding: 0;
+}
+
+.hamburger__line {
+  background-color: #FFFFFF;
+  height: 3px;
+  width: 100%;
+  transition: all ease-in-out 1s;
+}
+
+.hamburger__line_type_collapsed:nth-of-type(1) {
+  transform: translateY(10px) rotate(45deg);
+}
+
+.hamburger__line_type_collapsed:nth-of-type(2) {
+  width: 0;
+}
+
+.hamburger__line_type_collapsed:nth-of-type(3) {
+  transform: translateY(-10px) rotate(-45deg);
+}
+
+@media (max-width: 768px) {
+  .hamburger__lines {
+    min-width: 28px;
+    z-index: 101;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    gap: 7px
+  }
+}
