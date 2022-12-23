@@ -24,7 +24,7 @@
 }
 
 .promo__heading {
-  width: 50vw;
+  width: 50%;
   margin: 0;
   box-sizing: border-box;
   font-weight: 400;
@@ -34,7 +34,7 @@
 }
 
 .promo__subheading {
-  width: 25vw;
+  width: 25%;
   padding-top: 36px;
   font-weight: 400;
   font-size: 13px;
@@ -73,7 +73,7 @@
   }
 
   .promo__subheading {
-    width: 33vw;
+    width: 33%;
     text-align: center;
     padding-bottom: 102px;
   }

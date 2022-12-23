@@ -5,10 +5,11 @@ import Techs from './Techs/Techs';
 import AboutMe from './AboutMe/AboutMe';
 import Header from '../Header/Header';
 import Footer from '../Footer/Footer';
+import Page from '../Page/Page';
 
 function Main() {
   return (
-    <>
+    <Page>
       <Header />
       <main>
         <Promo />
@@ -17,7 +18,7 @@ function Main() {
         <AboutMe />
       </main>
       <Footer />
-    </>
+    </Page>
   );
 }
 export default Main;

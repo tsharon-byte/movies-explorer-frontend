@@ -87,6 +87,9 @@ input:checked[type="checkbox"]:before {
   .search-form {
     align-items: end;
   }
+  .search-form__checkbox {
+    flex-direction: row-reverse;
+  }
 }
 
 @media (max-width: 520px) {
