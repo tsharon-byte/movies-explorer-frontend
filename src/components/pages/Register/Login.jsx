@@ -1,15 +1,18 @@
 import React, { useState } from 'react';
+import PropTypes from 'prop-types';
 import './Register.css';
-import { NavLink, useHistory } from 'react-router-dom';
+import { NavLink, useNavigate } from 'react-router-dom';
 import Logo from '../../Logo/Logo';
 import getMessage from '../../../utils/utils';
 import ControlledInput from '../../CintrolledInput/ControlledInput';
 import FormButton from '../../FormButton/FormButton';
+import mainApi from '../../../utils/MainApi';
 
-function Login() {
-  const history = useHistory();
+function Login({ toggleShouldUpdate }) {
+  const navigate = useNavigate();
   const [values, setValues] = useState({ email: '', password: '' });
   const [errors, setErrors] = useState({ email: ' ', password: ' ' });
+  const [error, setError] = useState('');
 
   const handleChange = (e) => {
     setValues({ ...values, [e.target.name]: e.target.value });
@@ -18,8 +21,15 @@ function Login() {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    console.log('Submit', values);
-    history.push('/');
+    mainApi.postLogin(values).then((res) => {
+      console.log(res);
+      toggleShouldUpdate();
+      navigate(-1);
+      // JWT хранится в куки
+    }).catch((err) => {
+      console.log(err);
+      setError(err.message);
+    });
   };
 
   return (
@@ -30,10 +40,30 @@ function Login() {
       </div>
       <form className="form" onSubmit={handleSubmit}>
         <div className="form__inputs">
-          <ControlledInput value={values.email} onChange={handleChange} placeholder="Email" id="email" label="E-mail" error={errors.email} type="email" />
-          <ControlledInput value={values.password} onChange={handleChange} placeholder="Пароль" id="password" label="Пароль" type="password" error={errors.password} minLength={2} autoComplete="new-password" />
+          <ControlledInput
+            value={values.email}
+            onChange={handleChange}
+            placeholder="Email"
+            id="email"
+            label="E-mail"
+            error={errors.email}
+            type="email"
+            required
+          />
+          <ControlledInput
+            value={values.password}
+            onChange={handleChange}
+            placeholder="Пароль"
+            id="password"
+            label="Пароль"
+            type="password"
+            error={errors.password}
+            required
+            autoComplete="new-password"
+          />
         </div>
         <div className="form__footer">
+          <span className="error">{error}</span>
           <FormButton text="Войти" errors={Object.values(errors)} />
           <div className="form__links">
             <span className="form__text">Ещё не зарегистрированы?</span>
@@ -44,4 +74,7 @@ function Login() {
     </div>
   );
 }
+Login.propTypes = {
+  toggleShouldUpdate: PropTypes.func.isRequired,
+};
 export default Login;

@@ -8,7 +8,6 @@ function ControlledInput({
   return (
     <label htmlFor={id} className="label">
       {label}
-      {/* eslint-disable-next-line react/jsx-props-no-spreading */}
       <input id={id} className={`input ${error.length !== 0 ? 'input__error' : ''}`} name={id} {...rest} />
       <span className="form__error">{error}</span>
     </label>

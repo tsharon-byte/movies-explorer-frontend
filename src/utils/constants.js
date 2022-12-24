@@ -78,3 +78,5 @@ export const saved = [{
   nameRU: 'Повседневная жизнь бессмертного короля',
   nameEN: 'Повседневная жизнь бессмертного короля',
 }];
+
+export const USER = 'user';

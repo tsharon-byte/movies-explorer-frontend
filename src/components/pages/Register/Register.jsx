@@ -1,15 +1,20 @@
-import React, { useState } from 'react';
+import React, { useContext, useState } from 'react';
 import './Register.css';
-import { NavLink, useHistory } from 'react-router-dom';
+import { NavLink, useNavigate } from 'react-router-dom';
+import PropTypes from 'prop-types';
 import Logo from '../../Logo/Logo';
 import getMessage from '../../../utils/utils';
 import ControlledInput from '../../CintrolledInput/ControlledInput';
 import FormButton from '../../FormButton/FormButton';
+import mainApi from '../../../utils/MainApi';
+import CurrentUserContext from '../../../contexts/CurrentUserContext';
 
-function Register() {
+function Register({ toggleShouldUpdate }) {
+  const { setCurrentUser } = useContext(CurrentUserContext);
+  const navigate = useNavigate();
   const [values, setValues] = useState({ name: '', email: '', password: '' });
   const [errors, setErrors] = useState({ name: ' ', email: ' ', password: ' ' });
-  const history = useHistory();
+  const [error, setError] = useState('');
 
   const handleChange = (e) => {
     setValues({ ...values, [e.target.name]: e.target.value });
@@ -19,7 +24,15 @@ function Register() {
   const handleSubmit = (e) => {
     e.preventDefault();
     console.log('Submit', values);
-    history.push('/signin');
+    mainApi.postSignUp(values).then((res) => {
+      console.log(res);
+      setCurrentUser(res);
+      navigate('/movies');
+      toggleShouldUpdate();
+    }).catch((err) => {
+      console.log(err);
+      setError(err.message);
+    });
   };
 
   return (
@@ -30,11 +43,39 @@ function Register() {
       </div>
       <form className="form" onSubmit={handleSubmit}>
         <div className="form__inputs">
-          <ControlledInput value={values.name} onChange={handleChange} placeholder="Имя" id="name" label="Имя" error={errors.name} minLength={2} />
-          <ControlledInput value={values.email} onChange={handleChange} placeholder="Email" id="email" label="E-mail" error={errors.email} type="email" />
-          <ControlledInput value={values.password} onChange={handleChange} placeholder="Пароль" id="password" label="Пароль" type="password" error={errors.password} minLength={2} autoComplete="new-password" />
+          <ControlledInput
+            value={values.name}
+            onChange={handleChange}
+            placeholder="Имя"
+            id="name"
+            label="Имя"
+            error={errors.name}
+            required
+          />
+          <ControlledInput
+            value={values.email}
+            onChange={handleChange}
+            placeholder="Email"
+            id="email"
+            label="E-mail"
+            error={errors.email}
+            type="email"
+            required
+          />
+          <ControlledInput
+            value={values.password}
+            onChange={handleChange}
+            placeholder="Пароль"
+            id="password"
+            label="Пароль"
+            type="password"
+            error={errors.password}
+            autoComplete="new-password"
+            required
+          />
         </div>
         <div className="form__footer">
+          <span className="error">{error}</span>
           <FormButton text="Зарегистрироваться" errors={Object.values(errors)} />
           <div className="form__links">
             <span className="form__text">Уже зарегистрированы?</span>
@@ -45,4 +86,9 @@ function Register() {
     </div>
   );
 }
+
+Register.propTypes = {
+  toggleShouldUpdate: PropTypes.func.isRequired,
+};
+
 export default Register;

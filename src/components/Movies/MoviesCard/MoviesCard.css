@@ -47,6 +47,29 @@
   color: #8B8B8B;
 }
 
+.like-btn {
+  border: none;
+  background: transparent url("/src/images/save.svg");
+  width: 30px;
+  height: 30px;
+}
+
+.remove-btn {
+  border: none;
+  background: transparent url("/src/images/remove.svg");
+  width: 30px;
+  height: 30px;
+}
+
+button:focus {
+  outline: #FFFFFF 3px solid;
+}
+
+.like-btn__type_liked{
+  background: transparent url("/src/images/NotSave.svg");
+}
+
+
 @media (max-width: 520px) {
   .card {
     width: 300px;

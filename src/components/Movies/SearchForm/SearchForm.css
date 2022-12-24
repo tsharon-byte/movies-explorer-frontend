@@ -12,7 +12,46 @@
   padding: 0 0 13px 0;
   width: 100%;
   outline: none;
+  font-weight: 500;
+  font-size: 28px;
+  line-height: 34px;
 }
+
+
+element.style {
+}
+
+.search__input {
+  border: none;
+  color: #fff;
+  border-bottom: 1px solid #424242;
+  background: transparent;
+  box-sizing: border-box;
+  padding: 0 0 13px 0;
+  width: 100%;
+  outline: none;
+  font-weight: 500;
+  font-size: 28px;
+  line-height: 34px;
+}
+
+button, input {
+  overflow: visible;
+}
+
+button, input, optgroup, select, textarea {
+  font-family: inherit;
+  font-size: 100%;
+  line-height: 1.15;
+  margin: 0;
+}
+
+input:-internal-autofill-selected {
+  color: #FFFFFF;
+  background-color: transparent;
+}
+
+
 .search__input:focus {
   border-bottom: 2px solid #fff;
 }
@@ -87,6 +126,7 @@ input:checked[type="checkbox"]:before {
   .search-form {
     align-items: end;
   }
+
   .search-form__checkbox {
     flex-direction: row-reverse;
   }
