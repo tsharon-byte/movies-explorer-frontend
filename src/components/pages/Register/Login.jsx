@@ -21,13 +21,11 @@ function Login({ toggleShouldUpdate }) {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    mainApi.postLogin(values).then((res) => {
-      console.log(res);
+    mainApi.postLogin(values).then(() => {
       toggleShouldUpdate();
-      navigate(-1);
+      navigate('/');
       // JWT хранится в куки
     }).catch((err) => {
-      console.log(err);
       setError(err.message);
     });
   };

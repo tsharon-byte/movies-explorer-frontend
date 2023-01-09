@@ -45,7 +45,7 @@ function MoviesCardList({
     if (filter && filter.film && filter.film !== '') {
       filteredArray = filteredArray.filter((i) => RegExp(filter.film, 'i').test(i.nameRU));
     }
-    if (filter && filter.isSmall) {
+    if (filter && filter.isSmall === true) {
       filteredArray = filteredArray.filter((i) => i.duration <= 40);
     }
     setMoviesToSHow(filteredArray);

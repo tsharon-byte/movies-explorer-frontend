@@ -9,11 +9,9 @@ import mainApi from '../../utils/MainApi';
 function SavedMovies() {
   const [saved, setSaved] = useState([]);
   const [flag, setFlag] = useState(false);
-  const [filter, setFilter] = useState({ film: '', isSmall: true });
+  const [filter, setFilter] = useState({ film: '', isSmall: null });
   useEffect(() => {
-    console.log(filter);
     mainApi.getMovies().then((res) => {
-      console.log(res);
       setSaved(res);
     });
   }, [flag]);
@@ -29,6 +27,7 @@ function SavedMovies() {
             movies={saved}
             isSaved
             render={() => setFlag(!flag)}
+            filter={filter}
           />
           )}
         </main>
