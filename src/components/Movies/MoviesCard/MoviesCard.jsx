@@ -7,12 +7,8 @@ function MoviesCard({
   isSaved, card, render,
 }) {
   const removeFromSavedClick = () => {
-    console.log('removeFromSavedClick');
-    mainApi.deleteMovie(card._id).then((res) => {
-      console.log('TODO: to update card liked status', res);
-
+    mainApi.deleteMovie(card._id).then(() => {
       render();
-      // TODO: возможно нужно переривосать страницу с карточками
     });
   };
   const likeCardClick = () => {

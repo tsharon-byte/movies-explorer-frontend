@@ -3,7 +3,6 @@ import PropTypes from 'prop-types';
 import { Route, Navigate } from 'react-router-dom';
 
 function ProtectedRoute({ component: Component, loggedIn, ...props }) {
-  console.log('loggedIn', loggedIn);
   return (
     <Route>
       {loggedIn ? (

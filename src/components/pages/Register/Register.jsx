@@ -23,9 +23,7 @@ function Register({ toggleShouldUpdate }) {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    console.log('Submit', values);
     mainApi.postSignUp(values).then((res) => {
-      console.log(res);
       setCurrentUser(res);
       navigate('/movies');
       toggleShouldUpdate();

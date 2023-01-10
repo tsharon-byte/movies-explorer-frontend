@@ -25,16 +25,13 @@ function Profile({ toggleShouldUpdate }) {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    console.log('Submit', values);
     mainApi.patchUser(values)
       .then((res) => {
-        console.log('patchUser', res);
         setCurrentUser(res);
         toggleShouldUpdate();
         navigate(-1);
       })
       .catch((err) => {
-        console.log(err.message);
         setError(err.message);
       });
   };

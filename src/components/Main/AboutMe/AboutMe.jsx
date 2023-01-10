@@ -15,7 +15,14 @@ function AboutMe() {
             Татьяна
           </h2>
           <p className="about-me__role">Фронтенд разработчик</p>
-          <p className="about-me__info">Немного о себе ...</p>
+          <p className="about-me__info">
+            Немного о себе: работаю программистом с 2007 года.
+            <br />
+            Участвовала в таких проектах как разработка протоколов сотовых сетей, аудио конференции,
+            умные счетчики, веб-приложения.
+            <br />
+            В свободное время выращиваю экзотические растения: мандарины, лимоны и др.
+          </p>
           <div className="about-me__link">
             <Anchor href="https://github.com/tsharon-byte/" text="Github" />
           </div>
