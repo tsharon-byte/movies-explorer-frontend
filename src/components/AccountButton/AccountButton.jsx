@@ -1,12 +1,12 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { useHistory } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 import Account from '../../images/account.svg';
 
 function AccountButton({ onClick }) {
-  const { push } = useHistory();
+  const navigate = useNavigate();
   return (
-    <button className="account" type="button" onClick={() => { onClick(); push('/profile'); }}>
+    <button className="account" type="button" onClick={() => { onClick(); navigate('/profile'); }}>
       <img src={Account} alt="Значок аккаунта" />
       <span>Аккаунт</span>
     </button>

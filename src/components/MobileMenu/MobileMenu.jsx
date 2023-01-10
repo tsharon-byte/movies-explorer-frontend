@@ -5,9 +5,6 @@ import CustomLink from '../CustomLink/CustomLink';
 import AccountButton from '../AccountButton/AccountButton';
 
 function MobileMenu({ collapsed, setCollapsed, isSaved }) {
-  // const location = useLocation();
-  // const isSaved = location.pathname === '/saved-movies';
-  // useEffect(() => { console.log('constructor'); }, []);
   return (
     <div className={`mobile-menu ${!collapsed ? 'mobile-menu_type_off' : ''}`}>
       <ul className="mobile-menu__links">

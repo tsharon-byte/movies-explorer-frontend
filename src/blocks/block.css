@@ -1,6 +1,7 @@
 .block {
   box-sizing: border-box;
   padding: 0 5.46875%;
+  width: 100%;
 }
 
 @media (max-width: 768px) {
