@@ -43,7 +43,7 @@ function MoviesListPage({
         }
         return (
           <MoviesCard
-            key={item.id}
+            key={isSaved ? item._id : item.id}
             isSaved={isSaved}
             card={isSaved ? item : card}
             render={render}
@@ -56,7 +56,8 @@ function MoviesListPage({
 MoviesListPage.propTypes = {
   moviesToShow: PropTypes.arrayOf(PropTypes.shape({
     id: PropTypes.number,
-    image: PropTypes.objectOf(PropTypes.shape({ url: PropTypes.string, id: PropTypes.number })),
+    image: PropTypes.oneOfType([PropTypes.shape({ url: PropTypes.string, id: PropTypes.number }),
+      PropTypes.string]),
     nameRU: PropTypes.string,
     duration: PropTypes.number,
     liked: PropTypes.bool,

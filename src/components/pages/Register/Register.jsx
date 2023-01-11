@@ -1,7 +1,6 @@
 import React, { useContext, useState } from 'react';
-import './Register.css';
 import { NavLink, useNavigate } from 'react-router-dom';
-import PropTypes from 'prop-types';
+import './Register.css';
 import Logo from '../../Logo/Logo';
 import getMessage from '../../../utils/utils';
 import ControlledInput from '../../CintrolledInput/ControlledInput';
@@ -9,12 +8,13 @@ import FormButton from '../../FormButton/FormButton';
 import mainApi from '../../../utils/MainApi';
 import CurrentUserContext from '../../../contexts/CurrentUserContext';
 
-function Register({ toggleShouldUpdate }) {
+function Register() {
   const { setCurrentUser } = useContext(CurrentUserContext);
   const navigate = useNavigate();
   const [values, setValues] = useState({ name: '', email: '', password: '' });
   const [errors, setErrors] = useState({ name: ' ', email: ' ', password: ' ' });
   const [error, setError] = useState('');
+  const [working, setWorking] = useState(false);
 
   const handleChange = (e) => {
     setValues({ ...values, [e.target.name]: e.target.value });
@@ -23,14 +23,15 @@ function Register({ toggleShouldUpdate }) {
 
   const handleSubmit = (e) => {
     e.preventDefault();
+    setWorking(true);
     mainApi.postSignUp(values).then((res) => {
       setCurrentUser(res);
       navigate('/movies');
-      toggleShouldUpdate();
     }).catch((err) => {
-      console.log(err);
+      console.error(err);
       setError(err.message);
-    });
+      setCurrentUser(null);
+    }).finally(() => setWorking(false));
   };
 
   return (
@@ -74,7 +75,7 @@ function Register({ toggleShouldUpdate }) {
         </div>
         <div className="form__footer">
           <span className="error">{error}</span>
-          <FormButton text="Зарегистрироваться" errors={Object.values(errors)} />
+          <FormButton text="Зарегистрироваться" errors={Object.values(errors)} disabled={working} />
           <div className="form__links">
             <span className="form__text">Уже зарегистрированы?</span>
             <NavLink className="form__link" to="/signin">Войти</NavLink>
@@ -84,9 +85,5 @@ function Register({ toggleShouldUpdate }) {
     </div>
   );
 }
-
-Register.propTypes = {
-  toggleShouldUpdate: PropTypes.func.isRequired,
-};
 
 export default Register;

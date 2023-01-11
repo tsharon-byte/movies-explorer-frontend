@@ -1,5 +1,5 @@
 import React, { useEffect, useMemo, useState } from 'react';
-import { Navigate, Route, Routes } from 'react-router-dom';
+import { Route, Routes } from 'react-router-dom';
 import Main from '../Main/Main';
 import Login from '../pages/Register/Login';
 import Register from '../pages/Register/Register';
@@ -9,15 +9,12 @@ import SavedMovies from '../SavedMovies/SavedMovies';
 import Profile from '../pages/Register/Profile';
 import CurrentUserContext from '../../contexts/CurrentUserContext';
 import mainApi from '../../utils/MainApi';
-import { USER } from '../../utils/constants';
+import ProtectedRoutes from '../ProtectedRoutes';
+import { FILTER_FOR_SAVED_MOVIES, FILTER_IN_LOCAL_STORAGE, USER } from '../../utils/constants';
 import { getValue } from '../../utils/utils';
 
 function App() {
-  const [shouldUpdate, setShouldUpdate] = useState(false);
   const [currentUser, setCurrentUser] = useState(getValue(USER));
-  const toggleShouldUpdate = () => {
-    setShouldUpdate(!shouldUpdate);
-  };
   useEffect(() => {
     mainApi.getMe().then((user) => {
       setCurrentUser(user);
@@ -25,8 +22,11 @@ function App() {
     }).catch((err) => {
       console.log(err.message);
       setCurrentUser(null);
+      localStorage.removeItem(USER);
+      localStorage.removeItem(FILTER_IN_LOCAL_STORAGE);
+      localStorage.removeItem(FILTER_FOR_SAVED_MOVIES);
     });
-  }, [shouldUpdate]);
+  }, []);
   return (
     <CurrentUserContext.Provider value={
       useMemo(() => ({ currentUser, setCurrentUser }), [currentUser, setCurrentUser])
@@ -34,11 +34,18 @@ function App() {
     >
       <Routes>
         <Route path="/" element={<Main />} exact />
-        <Route path="/signin" element={<Login toggleShouldUpdate={toggleShouldUpdate} />} />
-        <Route path="/signup" element={<Register toggleShouldUpdate={toggleShouldUpdate} />} />
-        <Route path="/movies" element={currentUser && currentUser.name ? <Movies /> : <Navigate to="/signin" />} />
-        <Route path="/saved-movies" element={currentUser && currentUser.name ? <SavedMovies /> : <Navigate to="/signin" />} />
-        <Route path="/profile" element={currentUser && currentUser.name ? <Profile toggleShouldUpdate={toggleShouldUpdate} /> : <Navigate to="/signin" />} />
+        <Route path="/signin" element={<Login />} />
+        <Route path="/signup" element={<Register />} />
+        <Route element={(
+          <ProtectedRoutes
+            loggedIn={currentUser && currentUser.name !== undefined}
+          />
+)}
+        >
+          <Route path="/movies" element={<Movies />} />
+          <Route path="/saved-movies" element={<SavedMovies />} />
+          <Route path="/profile" element={<Profile />} />
+        </Route>
         <Route path="*" element={<NotFound />} />
       </Routes>
     </CurrentUserContext.Provider>

@@ -38,10 +38,10 @@ function SearchForm({ setFilter, initialValues }) {
 }
 SearchForm.propTypes = {
   setFilter: PropTypes.func.isRequired,
-  initialValues: PropTypes.objectOf(PropTypes.shape({
+  initialValues: PropTypes.shape({
     film: PropTypes.string,
     isSmall: PropTypes.bool,
-  })),
+  }),
 };
 SearchForm.defaultProps = {
   initialValues: { film: '', isSmall: false },

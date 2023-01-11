@@ -8,13 +8,18 @@ import moviesApi from '../../utils/MoviesApi';
 import Preloader from '../Preloader/Preloader';
 import { getValue } from '../../utils/utils';
 import mainApi from '../../utils/MainApi';
+import { FILTER_IN_LOCAL_STORAGE } from '../../utils/constants';
 
 function Movies() {
   const [movies, setMovies] = useState([]);
   const [flag, setFlag] = useState(false);
   const [error, setError] = useState('');
   const [working, setWorking] = useState(false);
-  const [filter, setFilter] = useState({});
+  const [filter, setFilter] = useState(getValue(FILTER_IN_LOCAL_STORAGE));
+  const saveFilter = (value) => {
+    setFilter(value);
+    localStorage.setItem(FILTER_IN_LOCAL_STORAGE, JSON.stringify(value));
+  };
   const movieMapper = (saved, item) => {
     const local = saved.filter((elem) => elem.movieId === item.id);
     return {
@@ -33,6 +38,7 @@ function Movies() {
         moviesApi.getMovies().then((m) => {
           setError('');
           setMovies(m.map((item) => movieMapper(saved, item)));
+          localStorage.setItem('movies', JSON.stringify(m));
         }).catch(() => {
           setError('Во время запроса произошла ошибка. Возможно, проблема с соединением или сервер недоступен. '
             + 'Подождите немного и попробуйте ещё раз');
@@ -47,7 +53,7 @@ function Movies() {
       <div className="column">
         <Navigation />
         <main className="column block">
-          <SearchForm setFilter={setFilter} />
+          <SearchForm setFilter={saveFilter} initialValues={filter} />
           {working ? <Preloader />
             : <MoviesCardList movies={movies} filter={filter} render={() => setFlag(!flag)} />}
           {error && <span>{error}</span>}

@@ -1,5 +1,4 @@
-import React, { useState } from 'react';
-import PropTypes from 'prop-types';
+import React, { useContext, useState } from 'react';
 import './Register.css';
 import { NavLink, useNavigate } from 'react-router-dom';
 import Logo from '../../Logo/Logo';
@@ -7,12 +6,15 @@ import getMessage from '../../../utils/utils';
 import ControlledInput from '../../CintrolledInput/ControlledInput';
 import FormButton from '../../FormButton/FormButton';
 import mainApi from '../../../utils/MainApi';
+import CurrentUserContext from '../../../contexts/CurrentUserContext';
 
-function Login({ toggleShouldUpdate }) {
+function Login() {
   const navigate = useNavigate();
+  const { setCurrentUser } = useContext(CurrentUserContext);
   const [values, setValues] = useState({ email: '', password: '' });
   const [errors, setErrors] = useState({ email: ' ', password: ' ' });
   const [error, setError] = useState('');
+  const [working, setWorking] = useState(false);
 
   const handleChange = (e) => {
     setValues({ ...values, [e.target.name]: e.target.value });
@@ -21,13 +23,15 @@ function Login({ toggleShouldUpdate }) {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    mainApi.postLogin(values).then(() => {
-      toggleShouldUpdate();
-      navigate('/');
+    setWorking(true);
+    mainApi.postLogin(values).then((user) => {
+      setCurrentUser(user);
+      navigate(-1);
       // JWT хранится в куки
     }).catch((err) => {
       setError(err.message);
-    });
+      setCurrentUser(null);
+    }).finally(() => setWorking(false));
   };
 
   return (
@@ -62,7 +66,7 @@ function Login({ toggleShouldUpdate }) {
         </div>
         <div className="form__footer">
           <span className="error">{error}</span>
-          <FormButton text="Войти" errors={Object.values(errors)} />
+          <FormButton text="Войти" errors={Object.values(errors)} disabled={working} />
           <div className="form__links">
             <span className="form__text">Ещё не зарегистрированы?</span>
             <NavLink className="form__link" to="/signup">Регистрация</NavLink>
@@ -72,7 +76,4 @@ function Login({ toggleShouldUpdate }) {
     </div>
   );
 }
-Login.propTypes = {
-  toggleShouldUpdate: PropTypes.func.isRequired,
-};
 export default Login;

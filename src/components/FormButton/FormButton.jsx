@@ -2,8 +2,8 @@ import React, { useEffect, useState } from 'react';
 import PropTypes from 'prop-types';
 import './FormButton.css';
 
-function FormButton({ text, errors }) {
-  const [disabled, setDisabled] = useState(false);
+function FormButton({ text, errors, disabled: disabledFromProps }) {
+  const [disabled, setDisabled] = useState(disabledFromProps);
 
   useEffect(() => {
     let result = false;
@@ -16,13 +16,16 @@ function FormButton({ text, errors }) {
     }
     setDisabled(result);
   });
-  return <button className={`form-button ${disabled ? 'disabled' : ''}`} type="submit" disabled={disabled}>{text}</button>;
+  return <button className={`form-button ${disabledFromProps || disabled ? 'disabled' : ''}`} type="submit" disabled={disabledFromProps || disabled}>{text}</button>;
 }
+
 FormButton.propTypes = {
   text: PropTypes.string,
   errors: PropTypes.arrayOf(PropTypes.string).isRequired,
+  disabled: PropTypes.bool,
 };
 FormButton.defaultProps = {
   text: '',
+  disabled: false,
 };
 export default FormButton;

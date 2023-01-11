@@ -1,7 +1,6 @@
 import React, { useContext, useState } from 'react';
 import './Register.css';
 import { useNavigate } from 'react-router-dom';
-import PropTypes from 'prop-types';
 import Navigation from '../../Navigation/Navigation';
 import getMessage from '../../../utils/utils';
 import ProfileInput from '../../CintrolledInput/ProfileInput';
@@ -9,13 +8,17 @@ import FormButton from '../../FormButton/FormButton';
 import CurrentUserContext from '../../../contexts/CurrentUserContext';
 import mainApi from '../../../utils/MainApi';
 import Error from '../../Error/Error';
+import Modal from '../../Modal/Modal';
+import { FILTER_FOR_SAVED_MOVIES, FILTER_IN_LOCAL_STORAGE, USER } from '../../../utils/constants';
 
-function Profile({ toggleShouldUpdate }) {
+function Profile() {
   const { currentUser, setCurrentUser } = useContext(CurrentUserContext);
   const [values, setValues] = useState({ email: currentUser.email, name: currentUser.name });
   const [errors, setErrors] = useState({ email: '', name: '' });
   const [isEditMode, setEditMode] = useState(false);
   const [error, setError] = useState('');
+  const [isOpen, setOpen] = useState(false);
+  const [working, setWorking] = useState(false);
   const navigate = useNavigate();
 
   const handleChange = (e) => {
@@ -25,19 +28,22 @@ function Profile({ toggleShouldUpdate }) {
 
   const handleSubmit = (e) => {
     e.preventDefault();
+    setWorking(true);
     mainApi.patchUser(values)
       .then((res) => {
         setCurrentUser(res);
-        toggleShouldUpdate();
-        navigate(-1);
+        setOpen(true);
+        setError('');
       })
       .catch((err) => {
         setError(err.message);
-      });
+      }).finally(() => setWorking(false));
   };
   const handleSignOut = () => {
     mainApi.signOut().then(() => {
-      localStorage.clear();
+      localStorage.removeItem(USER);
+      localStorage.removeItem(FILTER_IN_LOCAL_STORAGE);
+      localStorage.removeItem(FILTER_FOR_SAVED_MOVIES);
       setCurrentUser(null);
       navigate('/');
     }).catch((err) => {
@@ -46,8 +52,16 @@ function Profile({ toggleShouldUpdate }) {
   };
   return (
     <div className="profile">
+      <Modal
+        text="Данные профиля обновлены успешно"
+        isOpen={isOpen}
+        onClose={() => {
+          setOpen(false);
+          navigate(-1);
+        }}
+      />
       <Navigation />
-      <h1 className="register__header">{`Привет, ${values.name}!`}</h1>
+      <h1 className="register__header">{`Привет, ${currentUser.name}!`}</h1>
       <div className="profile__container">
         <form className="form" onSubmit={handleSubmit}>
           <div className="form__inputs">
@@ -75,7 +89,7 @@ function Profile({ toggleShouldUpdate }) {
             <Error error={error} />
           </div>
           {isEditMode && (
-          <FormButton text="Сохранить" errors={Object.values(errors)} />
+          <FormButton text="Сохранить" errors={Object.values(errors)} disabled={working || (values.name === currentUser.name && values.email === currentUser.email)} />
           )}
         </form>
         {!isEditMode && (
@@ -88,8 +102,4 @@ function Profile({ toggleShouldUpdate }) {
     </div>
   );
 }
-
-Profile.propTypes = {
-  toggleShouldUpdate: PropTypes.func.isRequired,
-};
 export default Profile;

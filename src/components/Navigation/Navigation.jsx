@@ -27,7 +27,6 @@ function Navigation() {
         </ul>
         <AccountButton />
       </div>
-
     </div>
   );
 }

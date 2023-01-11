@@ -7,25 +7,19 @@ function MoviesCard({
   isSaved, card, render,
 }) {
   const removeFromSavedClick = () => {
-    mainApi.deleteMovie(card._id).then(() => {
-      render();
-    });
+    mainApi.deleteMovie(card._id).then(() => render()).catch((err) => console.error(err.message));
   };
   const likeCardClick = () => {
     if (card.liked) {
       // Delete /movies
-      mainApi.deleteMovie(card.localId).then(() => {
-        render();
-      });
+      mainApi.deleteMovie(card.localId)
+        .then(() => render())
+        .catch((err) => console.error(err.message));
     } else {
       // POST /movies
       const { liked, ...cardToSave } = card;
-      mainApi.saveMovie(cardToSave).then(() => {
-        render();
-      })
-        .catch((err) => {
-          console.log(err.message);
-        });
+      mainApi.saveMovie(cardToSave).then(() => render())
+        .catch((err) => console.error(err.message));
     }
   };
   const hours = Math.floor(card.duration / 60);
@@ -65,7 +59,7 @@ function MoviesCard({
 MoviesCard.propTypes = {
   isSaved: PropTypes.bool.isRequired,
   render: PropTypes.func,
-  card: PropTypes.objectOf(PropTypes.shape({
+  card: PropTypes.shape({
     country: PropTypes.string.isRequired,
     director: PropTypes.string.isRequired,
     duration: PropTypes.number.isRequired,
@@ -78,7 +72,9 @@ MoviesCard.propTypes = {
     nameRU: PropTypes.string.isRequired,
     nameEN: PropTypes.string.isRequired,
     liked: PropTypes.bool,
-  })).isRequired,
+    _id: PropTypes.string,
+    localId: PropTypes.string,
+  }).isRequired,
 };
 MoviesCard.defaultProps = {
   render: () => {},
