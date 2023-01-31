@@ -78,3 +78,7 @@ export const saved = [{
   nameRU: 'Повседневная жизнь бессмертного короля',
   nameEN: 'Повседневная жизнь бессмертного короля',
 }];
+
+export const USER = 'user';
+export const FILTER_IN_LOCAL_STORAGE = 'filter';
+export const FILTER_FOR_SAVED_MOVIES = 'filterSavedMovies';

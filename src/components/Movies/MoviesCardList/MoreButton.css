@@ -1,0 +1,18 @@
+.movies__button {
+  background-color: #2F2F2F;
+  color: #FFFFFF;
+  border: none;
+  width: 520px;
+  font-weight: 500;
+  font-size: 12px;
+  line-height: 15px;
+  box-sizing: border-box;
+  padding-top: 11px;
+  padding-bottom: 9px;
+  text-align: center;
+  border-radius: 6px;
+}
+
+.movies__button_type_hidden {
+  display: none;
+}

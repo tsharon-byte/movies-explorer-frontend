@@ -13,6 +13,18 @@
   display: flex;
   flex-direction: column;
   gap: 74px;
+  position: relative;
+}
+
+.error {
+  font-weight: 400;
+  font-size: 11px;
+  line-height: 13px;
+  /* identical to box height */
+
+  text-align: center;
+
+  color: #FF004C;
 }
 
 .profile__container {
